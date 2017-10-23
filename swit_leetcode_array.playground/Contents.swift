@@ -3,15 +3,21 @@
 import UIKit
 
 //Two Sum
+/*
+ 1.充分利用哈希表的特性，避免双循环造成时间复杂度直线上升
+ 2.将数组 value 存到 dict 的 key 中,便于在一次循环中，直接求出两个 Array 的 index，
+   关键点：value = dict[target - y]
+ 
+*/
 func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     var result = [Int]()
-    var dicts = [Int: Int]()
-    for (i, j) in nums.enumerated() {
-        if let v = dicts[target - j], i != v {
-            result = [v, i]
+    var dict = [Int: Int]()
+    for (x, y) in nums.enumerated() {
+        if let value = dict[target - y], x != value {
+            result = [x, value]
             return result
         }
-        dicts[j] = i
+        dict[y] = x
     }
     return result
 }
